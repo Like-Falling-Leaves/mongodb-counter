@@ -1,6 +1,6 @@
 {
   "name": "mongodb-counter",
-  "description": "Auto-increment counters for MongoDB"
+  "description": "Auto-increment counters for MongoDB",
   "keywords": ["auto-increment", "counters", "counter", "mongodb"],
   "homepage": "https://github.com/like-falling-leaves/mongodb-counter",
   "bugs": { "url": "https://github.com/like-falling-leaves/mongodb-counter/issues" },
@@ -13,5 +13,5 @@
   "readmeFilename": "README.md",
   "dependencies": {},
   "devDependencies": { "mocha": "1.*" },
-  "scripts": { }
+  "scripts": {}
 }
