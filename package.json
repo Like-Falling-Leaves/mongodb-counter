@@ -1,0 +1,17 @@
+{
+  "name": "mongodb-counter",
+  "description": "Auto-increment counters for MongoDB"
+  "keywords": ["auto-increment", "counters", "counter", "mongodb"],
+  "homepage": "https://github.com/like-falling-leaves/mongodb-counter",
+  "bugs": { "url": "https://github.com/like-falling-leaves/mongodb-counter/issues" },
+  "license": "MIT",
+  "author": {"name": "Like FallingLeaves", "email": "likefallingleaves@gmail.com"},
+  "main": "./counter.js",
+  "maintainers": [{"name": "Like FallingLeaves", "email": "likefallingleaves@gmail.com"}],
+  "version": "0.0.1",
+  "repository": { "type": "git", "url": "git://github.com/like-falling-leaves/mongodb-counter.git" },
+  "readmeFilename": "README.md",
+  "dependencies": {},
+  "devDependencies": { "mocha": "1.*" },
+  "scripts": { }
+}
