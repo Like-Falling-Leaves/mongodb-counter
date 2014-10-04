@@ -5,11 +5,13 @@ module.exports.createCounters = createCounters;
 function createCounters(options) {
   var counters = counter(options);
   return function (name) {
+    var uniqueIdPool = [], callbacks = [];
     return {
       increment: counters.increment.bind(name),
       decrement: counters.decrement.bind(name),
       set: counters.set.bind(name),
-      get: counters.get.bind(name)
+      get: counters.get.bind(name),
+      getNextUniqueId: counters.get.getNextUniqueId.bind(name, uniqueIdPool, callbacks)
     };
   }
 }
@@ -22,6 +24,22 @@ function counter(options) {
     get: get,
     set: set
   };
+
+  function getNextUniqueId(counterName, uniqueIdPool, callbacks, done) {
+    if (uniqueIdPool.length) return done(null, uniqueIdPool.pop());
+    callbacks.push(done);
+    if (callbacks.length == 1) {
+      increment(counterName, 100, function (err, last) {
+        var notifies = callbacks.slice();
+        callbacks.length = 0;
+        if (!err) for(var jj = 0; jj < 100; jj ++) uniqueIdPool.push(last - jj)
+        for (var kk = 0; kk < notifies.length; kk ++) {
+          if (err) notifies[kk](err); 
+          else getNextUniqueId(counterName, uniqueIdPool, callbacks, notifies[kk]);
+        }
+      });
+    }
+  }
 
   function increment(counterName, by, done) {
     if (typeof(by) == 'function' || typeof(by) == 'undefined') { done = by; by = 1; }

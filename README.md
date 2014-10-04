@@ -52,5 +52,22 @@ https://travis-ci.org/Like-Falling-Leaves/mongodb-counter)
    });
    counters('requests').set(52); // update the value.
 
+   // if you only want to generate unique ids (for URL shortening for example),
+   // a much faster method is getNextUniqueId.  It only hits the database every 100
+   // calls.  Ofcourse, this has the side effect that the sequence is not strictly
+   // monotonically increasing in order and there could be gaps when there are crashes
+   // but uniqueness is guaranteed and the ordering will be almost monotonic.  This is
+   // suitable for a lot of cases where you just want a small unique ID.
+
+   function getShortUrl(longUrl, done) {
+     counters('requests').getNextUniqueId(function (err, uniqueId) {
+       if (err) return done(err);
+       var shortUrl = '/' + uniqueId.toString(36);
+       db.shortUrls.insert(
+         {shortUrl: '/' + uniqueId.toString(36), longUrl: longUrl},
+         function (err) { return done(err, !err && shortUrl); }
+       );
+     });
+   });
 ```
 
