@@ -1,5 +1,6 @@
 var assert = require('assert');
-var counter = require('../counter.js')({mongoUrl: process.env.MONGOHQ_URL});
+var counter = require('../counter.js')({mongoUrl: 'mongodb://127.0.0.1/test'});
+var counters = require('../counter.js').createCounters({mongoUrl: 'mongodb://127.0.0.1/test'});
 var nn = (new Date()).getTime();
 
 describe('MongoDB Counter', function () {
@@ -53,4 +54,19 @@ describe('MongoDB Counter', function () {
     });
   });
 
+  it ('should do getNextUniqueId really fast', function (done) {
+    var cc = counters('test5' + nn);
+
+    cc.getNextUniqueId(function (err, val) {
+      assert.ok(!err);
+      var val2 = 0;
+      cc.getNextUniqueId(function (err, val) {
+        assert.ok(!err);
+        val2 = val;
+      });
+      assert.ok(val2);
+      assert.equal(val + 1, val2);
+      done();
+    });
+  });
 });

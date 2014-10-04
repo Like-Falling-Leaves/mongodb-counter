@@ -13,5 +13,5 @@
   "readmeFilename": "README.md",
   "dependencies": { "mongodb" : "~1.2.0" },
   "devDependencies": { "mocha": "1.*" },
-  "scripts": {}
+  "scripts": { "test": "mocha test/" }
 }

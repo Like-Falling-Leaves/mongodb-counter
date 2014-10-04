@@ -7,11 +7,11 @@ function createCounters(options) {
   return function (name) {
     var uniqueIdPool = [], callbacks = [];
     return {
-      increment: counters.increment.bind(name),
-      decrement: counters.decrement.bind(name),
-      set: counters.set.bind(name),
-      get: counters.get.bind(name),
-      getNextUniqueId: counters.get.getNextUniqueId.bind(name, uniqueIdPool, callbacks)
+      increment: counters.increment.bind(null, name),
+      decrement: counters.decrement.bind(null, name),
+      set: counters.set.bind(null, name),
+      get: counters.get.bind(null, name),
+      getNextUniqueId: counters.getNextUniqueId.bind(null, name, uniqueIdPool, callbacks)
     };
   }
 }
@@ -22,6 +22,7 @@ function counter(options) {
     increment: increment,
     decrement: decrement,
     get: get,
+    getNextUniqueId: getNextUniqueId,
     set: set
   };
 
