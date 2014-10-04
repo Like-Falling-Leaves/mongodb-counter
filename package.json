@@ -8,10 +8,10 @@
   "author": {"name": "Like FallingLeaves", "email": "likefallingleaves@gmail.com"},
   "main": "./counter.js",
   "maintainers": [{"name": "Like FallingLeaves", "email": "likefallingleaves@gmail.com"}],
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": { "type": "git", "url": "git://github.com/like-falling-leaves/mongodb-counter.git" },
   "readmeFilename": "README.md",
-  "dependencies": {},
+  "dependencies": { "mongodb" : "~1.2.0" },
   "devDependencies": { "mocha": "1.*" },
   "scripts": {}
 }
