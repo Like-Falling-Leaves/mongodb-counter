@@ -49,7 +49,7 @@ function counter(options) {
       collection.findAndModify(
         {_id: counterName},
         {_id: 1},
-        {$inc: {seq: by}, $setOnInsert: {}},
+        {$inc: {seq: by}},
         {upsert: true, new: true},
         function (err, doc) { return done && done(err, doc && doc.seq); }
       );
